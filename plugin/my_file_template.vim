@@ -2,11 +2,11 @@
  " depend on file's extension.
  " by xuriwuyun
  "
-func! s:Create_hearder() 
+func! s:Create_hearder()
     let filename=@%
     let date=strftime("%m/%d/%Y")
     let time=strftime("%H:%M:%S")
-    let hearder = [' vim: tabstop=4 shiftwidth=4 softtabstop=4', 
+    let hearder = [' vim: tabstop=4 shiftwidth=4 softtabstop=4',
                 \'',
                 \' Copyright ' . strftime("%Y") .' www.jd.com',
                 \'',
@@ -14,14 +14,15 @@ func! s:Create_hearder()
                 \' Author: xuriwuyun <xuriwuyun@gmail.com>',
                 \' Created: '.date.' '.time,
                 \' Last_modified: '.date.' '.time]
-    
+
     return hearder
 endfunc
 
 "deffierent language has deffierent commentor
-let s:commentor='#'
 func! s:Add_hearder()
-    
+    " script valable will be keeped in memory, so we need to reinitiate
+    " s:commentor every time when call Add_hearder
+    let s:commentor='#'
     let file_type= expand("%:e")
     if file_type=='py'
         exe 'normal I'. s:commentor.'!/usr/bin/env python'
@@ -56,7 +57,7 @@ func! s:Update_modified_time()
     let time=strftime("%H:%M:%S")
     exe 'normal mp'
     try
-        silent exe '1,15s/^\(.. *\)\(Last_modified: \).*/\1\2'.date.' '.time
+        silent exe '1,12s/^\(.. *\)\(Last_modified: \).*/\1\2'.date.' '.time
     catch
         :
     endtry
