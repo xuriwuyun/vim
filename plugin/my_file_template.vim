@@ -30,7 +30,7 @@ func! s:Add_hearder()
     elseif file_type=='sh'
         exe 'normal I'.s:commentor.'!/usr/bin/env bash'
         exe "normal o". s:commentor. "\<CR>"
-    elseif or(file_type=='c', file_type=='cpp')
+    elseif file_type=='c' || file_type=='cpp' || file_type=='go'
         let s:commentor='//'
     elseif file_type=='vim'
         let s:commentor='"'
