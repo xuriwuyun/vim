@@ -8,7 +8,7 @@ func! s:Create_hearder()
     let time=strftime("%H:%M:%S")
     let hearder = [' vim: tabstop=4 shiftwidth=4 softtabstop=4',
                 \'',
-                \' Copyright ' . strftime("%Y") .' www.meituan.com',
+                \' Copyright ' . strftime("%Y") .' www.alibaba-inc.com',
                 \'',
                 \' File: ' . filename,
                 \' Author: xuriwuyun <xuriwuyun@gmail.com>',
