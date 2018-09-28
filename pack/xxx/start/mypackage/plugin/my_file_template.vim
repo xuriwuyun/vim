@@ -41,20 +41,20 @@ func! s:Add_header()
 
     let commentsdict = s:Commentsdict()
     if has_key(commentsdict, 's')
-        let header = s:header_with_three_piece_comment(commentsdict)
+        let l:header = s:header_with_three_piece_comment(commentsdict)
     else 
-        let header = s:header_with_normal_comment(commentsdict)
+        let l:header = s:header_with_normal_comment(commentsdict)
     endif
-    normal gg
-    set paste
-    for line in header
-        exe 'normal I'.line
-        exe 'normal o'
-    endfor
 
-    "insert two blank line between header and body
-    exe "normal o\<CR>"
-    set nopaste
+    if len(l:header) > 0
+        set paste
+        "insert two blank line between header and body
+        let l:header = l:header + ["", ""]
+        call append(0, l:header)
+        set nopaste
+    endif
+
+    call cursor(line('$'), col('$'))
     startinsert
 endfunc
 
@@ -94,8 +94,10 @@ func! s:header_with_normal_comment(commentsdict)
     let l:header_with_comments = []
     if has_key(a:commentsdict, 'b')
         let l:commentor = a:commentsdict['b']
-    else 
+    elseif has_key(a:commentsdict, '')
         let l:commentor = a:commentsdict['']
+    else 
+        return l:header_with_comments
     endif
 
     for line in header
