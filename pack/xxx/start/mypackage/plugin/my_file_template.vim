@@ -78,9 +78,9 @@ func! s:header_with_three_piece_comment(commentsdict)
     let l:i = 1
     for line in header
         if l:i == 1
-            let l:line_with_comment = a:commentsdict['s'].' '.line
+            let l:line_with_comment = a:commentsdict['s'].line
         else
-            let l:line_with_comment = ' '.a:commentsdict['m'].' '.line
+            let l:line_with_comment = ' '.a:commentsdict['m'].line
         endif
         call add(l:header_with_comments, l:line_with_comment)
         let l:i = l:i + 1
@@ -101,7 +101,7 @@ func! s:header_with_normal_comment(commentsdict)
     endif
 
     for line in header
-        let l:line_with_comment = l:commentor.' '.line
+        let l:line_with_comment = l:commentor.line
         call add(l:header_with_comments, l:line_with_comment)
     endfor
     return l:header_with_comments
